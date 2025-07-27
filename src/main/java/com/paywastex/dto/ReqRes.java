@@ -36,4 +36,6 @@ public class ReqRes {
     public void setOurUsers(OurUsers user) {
         this.ourUsersList = List.of(user);
     }
+
+
 }
