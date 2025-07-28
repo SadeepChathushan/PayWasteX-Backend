@@ -25,4 +25,10 @@ public class AdminServiceIMPL implements AdminService {
                 .map(user -> modelMapper.map (user, GetAllUserResponse.class))
                 .collect(Collectors.toList());
     }
+    @Override
+    public void deleteUserById(Integer id) {
+        OurUsers user = ourUsersRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        ourUsersRepo.delete(user);
+    }
 }

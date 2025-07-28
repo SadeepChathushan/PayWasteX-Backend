@@ -18,6 +18,7 @@ public interface OurUsersRepo extends JpaRepository<OurUsers, Integer> {
     List<OurUsers> findAllByAccountNonLockedFalseAndLockTimeIsNotNull();
 
     List<OurUsers> findAll();
+    void deleteById(Integer id);
 
 }
 
