@@ -29,7 +29,6 @@
 	<properties>
 		<java.version>21</java.version>
 
-		<!-- SonarQube properties -->
 		<sonar.projectKey>paywastex-backend</sonar.projectKey>
 		<sonar.projectName>PayWasteX Backend</sonar.projectName>
 		<sonar.projectVersion>1.0</sonar.projectVersion>
