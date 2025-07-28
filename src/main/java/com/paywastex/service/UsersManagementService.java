@@ -134,6 +134,7 @@ public class UsersManagementService {
         u.setContactNo(in.getContactNo());
         u.setDob(in.getDob());
         u.setGender(in.getGender());
+        u.setAddress(in.getAddress());
         u.setRole(in.getRole());
         u.setCreatedAt(new Date());
         u.setPassword(encoder.encode(in.getPassword()));
