@@ -2,7 +2,6 @@ package com.paywastex.service;
 
 import com.paywastex.dto.ReqRes;
 import com.paywastex.entity.OurUsers;
-import com.paywastex.enums.Role;
 import com.paywastex.repository.OurUsersRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -79,7 +78,7 @@ public class UsersManagementService {
         resp.setToken(access);
         resp.setRefreshToken(refresh);
         resp.setExpirationTime("5 min");
-        resp.setRole(user.getRole().name());
+        resp.setRole(user.getRole());
         resp.setUserId(user.getId());
         return resp;
     }
@@ -101,7 +100,7 @@ public class UsersManagementService {
             resp.setToken(access);
             resp.setRefreshToken(rtn);
             resp.setExpirationTime("5 min");
-            resp.setRole(user.getRole().name());
+            resp.setRole(user.getRole());
             resp.setUserId(user.getId());
         } catch (RuntimeException ex) {
             resp.setStatusCode(401);
@@ -136,13 +135,7 @@ public class UsersManagementService {
         u.setDob(in.getDob());
         u.setGender(in.getGender());
         u.setAddress(in.getAddress());
-        try {
-            u.setRole(Role.valueOf(in.getRole().toUpperCase())); // ✅ fix here
-        } catch (IllegalArgumentException e) {
-            resp.setStatusCode(400);
-            resp.setMassage("Invalid role. Allowed: ADMIN, SHOPOWNER, RESPONSIBLEOFFICER, FEECOLLECTOR");
-            return resp;
-        }
+        u.setRole(in.getRole());
         u.setCreatedAt(new Date());
         u.setPassword(encoder.encode(in.getPassword()));
 
