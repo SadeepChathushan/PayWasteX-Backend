@@ -38,7 +38,6 @@ public class SecurityConfig {
                         .requestMatchers("/shopOwner/**").hasAnyAuthority("SHOPOWNER")
                         .requestMatchers("/responsibleOfficer/**").hasAnyAuthority("RESPONSIBLEOFFICER")
                         .requestMatchers("/ feeCollector/**").hasAnyAuthority(" FEECOLLECTOR")
-//                        .requestMatchers("/anyuser/**").hasAnyAuthority("ADMIN", "CASHIER","STOCKKEEPER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager-> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
