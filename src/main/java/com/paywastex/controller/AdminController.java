@@ -1,6 +1,7 @@
 package com.paywastex.controller;
 
 import com.paywastex.dto.GetAllUserResponse;
+import com.paywastex.dto.request.AdminUserEditRequest;
 import com.paywastex.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,11 @@ public class AdminController {
     public ResponseEntity<String> deleteUser(@RequestParam Integer id){
         userService.deleteUserById(id);
         return ResponseEntity.ok("User deleted successfully");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestParam Integer id,@RequestBody AdminUserEditRequest request){
+        userService.updateUserById(id, request);
+        return ResponseEntity.ok("User updated successfully");
     }
 }

@@ -19,6 +19,8 @@ public interface OurUsersRepo extends JpaRepository<OurUsers, Integer> {
 
     List<OurUsers> findAll();
     void deleteById(Integer id);
+//    void editById(Integer id);
+
 
 }
 
