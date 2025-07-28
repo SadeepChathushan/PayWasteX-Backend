@@ -1,24 +1,18 @@
-package com.paywastex.dto;
+package com.paywastex.dto.request;
 
-import com.paywastex.entity.OurUsers;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAllUserResponse {
+public class AdminUserEditRequest {
 
-    private int id;
-    private String role;
     private String fullName;
     private String email;
     private String nic;
     private String contactNo;
-
 
 }
