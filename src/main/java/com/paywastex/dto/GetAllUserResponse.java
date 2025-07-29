@@ -19,6 +19,7 @@ public class GetAllUserResponse {
     private String email;
     private String nic;
     private String contactNo;
+    private boolean accountNonLocked;
 
 
 }
