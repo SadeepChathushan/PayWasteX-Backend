@@ -27,6 +27,9 @@ public class SecurityConfig {
     @Autowired
     private JWTAuthFilter jwtAuthFilter;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
@@ -38,8 +41,10 @@ public class SecurityConfig {
                         .requestMatchers("/shopOwner/**").hasAnyAuthority("SHOPOWNER")
                         .requestMatchers("/responsibleOfficer/**").hasAnyAuthority("RESPONSIBLEOFFICER")
                         .requestMatchers("/ feeCollector/**").hasAnyAuthority(" FEECOLLECTOR")
-//                        .requestMatchers("/anyuser/**").hasAnyAuthority("ADMIN", "CASHIER","STOCKKEEPER")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)  //
                 )
                 .sessionManagement(manager-> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
