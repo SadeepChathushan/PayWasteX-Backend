@@ -18,6 +18,9 @@ public class Customer {
     @JoinColumn(name="id")
     private OurUsers user;
 
+    @Column(unique = true)
+    private String customerCode;
+
     private String businessName;
 
     private String businessType;
