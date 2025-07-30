@@ -123,6 +123,13 @@ public class OurUsers implements UserDetails {
         return password;
     }
 
+    // In your OurUsers entity
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RefreshToken> refreshTokens;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Customer customer;
+
 
 }
 
