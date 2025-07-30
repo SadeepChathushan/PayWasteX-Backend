@@ -1,4 +1,4 @@
-package com.paywastex.dto;
+package com.paywastex.dto.request;
 
 import lombok.Data;
 
@@ -10,6 +10,7 @@ public class CustomerRegistration {
     private String password;
     private String nic;
     private String contactNo;
+    private String role;
 
     // Shop Info
     private String businessName;

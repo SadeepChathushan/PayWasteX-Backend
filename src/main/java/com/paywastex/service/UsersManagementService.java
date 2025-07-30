@@ -1,6 +1,6 @@
 package com.paywastex.service;
 
-import com.paywastex.dto.CustomerRegistration;
+import com.paywastex.dto.request.CustomerRegistration;
 import com.paywastex.dto.ReqRes;
 import com.paywastex.entity.Customer;
 import com.paywastex.entity.OurUsers;
@@ -182,6 +182,7 @@ public class UsersManagementService {
             OurUsers user = new OurUsers();
             user.setFullName(dto.getFullName());
             user.setEmail(dto.getEmail());
+            user.setRole(dto.getRole());
             user.setPassword(encoder.encode(dto.getPassword()));
             user.setNic(dto.getNic());
             user.setContactNo(dto.getContactNo());
