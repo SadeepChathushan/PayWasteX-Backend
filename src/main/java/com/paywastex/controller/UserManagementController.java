@@ -1,6 +1,6 @@
 package com.paywastex.controller;
 
-import com.paywastex.dto.CustomerRegistration;
+import com.paywastex.dto.request.CustomerRegistration;
 import com.paywastex.dto.ReqRes;
 import com.paywastex.service.UsersManagementService;
 import jakarta.servlet.http.HttpServletResponse;
