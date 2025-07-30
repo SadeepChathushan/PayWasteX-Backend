@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/feeCollector")
+@RequestMapping("api/feeCollector")
 public class FeeCollectionController {
     @Autowired
     private FeeCollectionService feeCollectionService;

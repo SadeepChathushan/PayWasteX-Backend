@@ -40,8 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/shopOwner/**").hasAnyAuthority("CUSTOMER")
                         .requestMatchers("/responsibleOfficer/**").hasAnyAuthority("RESPONSIBLEOFFICER")
-                                .requestMatchers("/feeCollector/**").permitAll()
-//                        .requestMatchers("/feeCollector/**").hasAnyAuthority(" FEECOLLECTOR")
+                        .requestMatchers("/feeCollector/**").hasAnyAuthority("FEECOLLECTOR")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(handling -> handling
