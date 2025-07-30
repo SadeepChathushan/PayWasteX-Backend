@@ -18,7 +18,9 @@ import java.util.function.Function;
 public class JWTUtils {
 
     private final SecretKey key;
-    private static final long EXPIRATION_TIME = 60_000L; // 5 minutes
+
+    private static final long EXPIRATION_TIME = 15 * 60 * 1000L; // 5 minutes
+
 
     public JWTUtils() {
         // Your secret key string should be base64-encoded
