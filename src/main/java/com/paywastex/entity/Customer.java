@@ -1,13 +1,17 @@
 package com.paywastex.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "customer")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Customer {
     @Id
@@ -41,8 +45,5 @@ public class Customer {
 
     private String paymentMethod;
 
-    private Integer paymentDueDay;
-
-    private BigDecimal defaultFeeAmount;
 
 }
