@@ -1,6 +1,7 @@
 package com.paywastex.config;
 
 
+import com.paywastex.exception.UnauthorizedException;
 import com.paywastex.service.JWTUtils;
 import com.paywastex.service.OurUserDetailsService;
 import jakarta.servlet.FilterChain;
@@ -39,21 +40,27 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         }
 
         jwtToken = authHeader.substring(7);
-        userEmail = jwtUtils.extractUsername(jwtToken);
 
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = ourUserDetailsService.loadUserByUsername(userEmail);
+        try {
+            userEmail = jwtUtils.extractUsername(jwtToken);
 
-            if(jwtUtils.isTokenValid(jwtToken, userDetails)) {
-                SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                securityContext.setAuthentication(token);
-                SecurityContextHolder.setContext(securityContext);
+            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = ourUserDetailsService.loadUserByUsername(userEmail);
+
+                if (jwtUtils.isTokenValid(jwtToken, userDetails)) {
+                    UsernamePasswordAuthenticationToken token =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(token);
+                }
             }
+
+            filterChain.doFilter(request, response);
+
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            throw new UnauthorizedException("Token has expired");
+        } catch (io.jsonwebtoken.JwtException e) {
+            throw new UnauthorizedException("Invalid token");
         }
-        filterChain.doFilter(request, response);
     }
 }

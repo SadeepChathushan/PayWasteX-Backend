@@ -27,6 +27,9 @@ public class SecurityConfig {
     @Autowired
     private JWTAuthFilter jwtAuthFilter;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
@@ -35,11 +38,14 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/auth/**", "/public/**").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/shopOwner/**").hasAnyAuthority("SHOPOWNER")
+                        .requestMatchers("/shopOwner/**").hasAnyAuthority("CUSTOMER")
                         .requestMatchers("/responsibleOfficer/**").hasAnyAuthority("RESPONSIBLEOFFICER")
-                        .requestMatchers("/ feeCollector/**").hasAnyAuthority(" FEECOLLECTOR")
-//                        .requestMatchers("/anyuser/**").hasAnyAuthority("ADMIN", "CASHIER","STOCKKEEPER")
+                                .requestMatchers("/feeCollector/**").permitAll()
+//                        .requestMatchers("/feeCollector/**").hasAnyAuthority(" FEECOLLECTOR")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)  //
                 )
                 .sessionManagement(manager-> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(

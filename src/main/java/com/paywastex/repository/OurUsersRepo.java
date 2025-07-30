@@ -16,5 +16,11 @@ public interface OurUsersRepo extends JpaRepository<OurUsers, Integer> {
     boolean existsByEmail(String email);
 
     List<OurUsers> findAllByAccountNonLockedFalseAndLockTimeIsNotNull();
+
+    List<OurUsers> findAll();
+    void deleteById(Integer id);
+//    void editById(Integer id);
+
+
 }
 
