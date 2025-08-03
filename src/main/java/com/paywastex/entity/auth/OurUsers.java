@@ -1,6 +1,7 @@
 package com.paywastex.entity.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.paywastex.entity.customer.Customer;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
