@@ -1,4 +1,4 @@
-package com.paywastex.entity;
+package com.paywastex.entity.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

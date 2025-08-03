@@ -1,6 +1,6 @@
 package com.paywastex.scheduled;
 
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.repository.OurUsersRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

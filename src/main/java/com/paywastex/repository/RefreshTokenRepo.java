@@ -1,6 +1,6 @@
 package com.paywastex.repository;
 
-import com.paywastex.entity.RefreshToken;
+import com.paywastex.entity.auth.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,11 +1,10 @@
-package com.paywastex.entity;
+package com.paywastex.entity.customer;
 
+import com.paywastex.entity.auth.OurUsers;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "customer")

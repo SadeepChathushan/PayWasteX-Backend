@@ -1,7 +1,7 @@
 package com.paywastex.service;
 
 
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.repository.OurUsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

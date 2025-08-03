@@ -1,6 +1,6 @@
 package com.paywastex.repository;
 
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

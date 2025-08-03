@@ -2,8 +2,8 @@ package com.paywastex.service;
 
 import com.paywastex.dto.request.CustomerRegistration;
 import com.paywastex.dto.ReqRes;
-import com.paywastex.entity.Customer;
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.customer.Customer;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.repository.CustomerRepository;
 import com.paywastex.repository.OurUsersRepo;
 import jakarta.servlet.http.HttpServletResponse;

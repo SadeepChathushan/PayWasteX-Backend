@@ -1,6 +1,7 @@
 package com.paywastex.controller;
 
 
+import com.paywastex.dto.DashboardSummaryDto;
 import com.paywastex.dto.FeeCollectionCardDto;
 import com.paywastex.service.FeeCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,14 @@ public class FeeCollectionController {
     @Autowired
     private FeeCollectionService feeCollectionService;
 
-    @GetMapping("/dashboard")
-    public ResponseEntity<List<FeeCollectionCardDto>> getFeeCollectionCardsByZone(@RequestParam Long zoneId) {
-        List<FeeCollectionCardDto> cards = feeCollectionService.getCardsByZone(zoneId);
+    @GetMapping("/dashboard/cards")
+    public ResponseEntity<List<FeeCollectionCardDto>> getFeeCollectionCardsByZone(@RequestParam String zoneName) {
+        List<FeeCollectionCardDto> cards = feeCollectionService.getCardsByZone(zoneName);
         return ResponseEntity.ok(cards);
+    }
+
+    @GetMapping("/dashboard/summary")
+    public DashboardSummaryDto getDashboardSummary(){
+        return feeCollectionService.getDashboardSummary();
     }
 }

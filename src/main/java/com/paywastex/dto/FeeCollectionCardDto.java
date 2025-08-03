@@ -17,5 +17,5 @@ public class FeeCollectionCardDto {
     private String businessType;
     private BigDecimal outstandingDue;
     private String status;
-    private Long zoneId;
+    private String zoneName;
 }
