@@ -1,13 +1,21 @@
 package com.paywastex.service.IMPL;
 
+import com.paywastex.dto.CollectorTotalResponse;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.entity.DirectCustomerPayment;
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
+import com.paywastex.entity.billing.PaymentCollection;
 import com.paywastex.repository.DirectCustomerPayRepository;
 import com.paywastex.repository.OurUsersRepo;
+import com.paywastex.repository.PaymentCollectionRepository;
 import com.paywastex.service.ResposibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
@@ -17,6 +25,9 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
 
     @Autowired
     private OurUsersRepo ourUsersRepo;
+
+    @Autowired
+    private PaymentCollectionRepository paymentCollectionRepository;
 
     @Override
     public DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest) {
@@ -35,4 +46,21 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
 
         return paymentRepository.save(payment);
     }
+
+    @Override
+    public List<CollectorTotalResponse> getCollectorTotals() {
+        List<Object[]> results = paymentCollectionRepository.getCollectorWiseTotalsWithName();
+
+        return results.stream()
+                .map(result -> {
+                    CollectorTotalResponse response = new CollectorTotalResponse();
+                    response.setCollectorId(((Integer) result[0]).longValue()); // Convert int to long
+                    response.setCollectorName((String) result[1]); // Maps to fullName
+                    response.setTotalCollectedAmount(((BigDecimal) result[2]).toString());
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
+

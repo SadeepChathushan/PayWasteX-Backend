@@ -11,9 +11,4 @@ public interface PaymentRepository extends JpaRepository<Payment,Long> {
 
     long countByStatus(PaymentStatus status);
 
-//    @Query("SELECT COALESCE(SUM(p.paidAmount),0) FROM Payment p WHERE p.paidAmount IS NOT NULL")
-//    BigDecimal sumAllPaidAmounts();
-//
-//    @Query("SELECT COALESCE(SUM(p.paidAmount),0) FROM Payment p WHERE DATE(p.collectedDate) = :today")
-//    BigDecimal sumPaidAmountByCollectedDate(LocalDate today);
 }
