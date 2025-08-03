@@ -2,7 +2,7 @@ package com.paywastex.service.IMPL;
 
 import com.paywastex.dto.GetAllUserResponse;
 import com.paywastex.dto.request.AdminUserEditRequest;
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.repository.OurUsersRepo;
 import com.paywastex.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

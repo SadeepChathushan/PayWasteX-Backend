@@ -1,6 +1,6 @@
 package com.paywastex.service;
 
-import com.paywastex.entity.AuditLog;
+import com.paywastex.entity.logging.AuditLog;
 import com.paywastex.repository.AuditLogRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;

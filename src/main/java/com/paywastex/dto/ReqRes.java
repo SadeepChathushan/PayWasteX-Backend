@@ -3,7 +3,7 @@ package com.paywastex.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import lombok.Data;
 
 import java.util.Date;

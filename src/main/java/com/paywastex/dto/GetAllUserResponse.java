@@ -1,12 +1,8 @@
 package com.paywastex.dto;
 
-import com.paywastex.entity.OurUsers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

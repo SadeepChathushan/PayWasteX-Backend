@@ -1,10 +1,13 @@
-package com.paywastex.entity;
+package com.paywastex.entity.customer;
 
 
+import com.paywastex.entity.auth.OurUsers;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "zone")
 public class Zone {

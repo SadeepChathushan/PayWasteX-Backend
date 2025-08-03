@@ -1,7 +1,7 @@
 package com.paywastex.service;
 
-import com.paywastex.entity.OurUsers;
-import com.paywastex.entity.RefreshToken;
+import com.paywastex.entity.auth.OurUsers;
+import com.paywastex.entity.auth.RefreshToken;
 import com.paywastex.exception.UnauthorizedException;
 import com.paywastex.repository.RefreshTokenRepo;
 import lombok.RequiredArgsConstructor;

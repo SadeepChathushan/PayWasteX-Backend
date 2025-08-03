@@ -1,4 +1,4 @@
-package com.paywastex.entity;
+package com.paywastex.entity.logging;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
