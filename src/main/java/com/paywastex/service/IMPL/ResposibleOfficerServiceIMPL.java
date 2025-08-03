@@ -2,7 +2,7 @@ package com.paywastex.service.IMPL;
 
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.entity.DirectCustomerPayment;
-import com.paywastex.entity.OurUsers;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.repository.DirectCustomerPayRepository;
 import com.paywastex.repository.OurUsersRepo;
 import com.paywastex.service.ResposibleOfficerService;

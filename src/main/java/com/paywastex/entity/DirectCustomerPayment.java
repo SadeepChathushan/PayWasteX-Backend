@@ -1,5 +1,6 @@
 package com.paywastex.entity;
 
+import com.paywastex.entity.auth.OurUsers;
 import jakarta.persistence.*;
 import lombok.Data;
 
