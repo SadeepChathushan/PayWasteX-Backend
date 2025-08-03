@@ -1,6 +1,7 @@
 package com.paywastex.service.IMPL;
 
 import com.paywastex.dto.CollectorTotalResponse;
+import com.paywastex.dto.DashboardCardResponse;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.entity.DirectCustomerPayment;
 import com.paywastex.entity.auth.OurUsers;
@@ -62,5 +63,14 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public DashboardCardResponse getTotalActiveFeeCollectors() {
+        long count = ourUsersRepo.countByAccountNonLockedTrueAndRole("FEECOLLECTOR");
+
+        DashboardCardResponse response = new DashboardCardResponse();
+        response.setTotalFeeCollector(String.valueOf(count));
+        return response;
+    }
 }
 
