@@ -1,6 +1,7 @@
 package com.paywastex.controller;
 
 import com.paywastex.dto.CollectorTotalResponse;
+import com.paywastex.dto.DashboardCardResponse;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.service.ResposibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,10 @@ public class ResposibleOfficerController {
     @GetMapping("/collectors/total-collected")
     public List<CollectorTotalResponse> getAllCollectorTotals() {
         return responsibleOfficerService.getCollectorTotals();
+    }
+    @GetMapping("/total-active-fee-collectors")
+    public ResponseEntity<DashboardCardResponse> getTotalActiveFeeCollectors() {
+        DashboardCardResponse response = responsibleOfficerService.getTotalActiveFeeCollectors();
+        return ResponseEntity.ok(response);
     }
 }
