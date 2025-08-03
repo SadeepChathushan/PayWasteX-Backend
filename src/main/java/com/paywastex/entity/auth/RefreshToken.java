@@ -1,4 +1,4 @@
-package com.paywastex.entity;
+package com.paywastex.entity.auth;
 
 
 import jakarta.persistence.*;

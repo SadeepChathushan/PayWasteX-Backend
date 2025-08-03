@@ -1,5 +1,7 @@
-package com.paywastex.entity;
+package com.paywastex.entity.logging;
 
+
+import com.paywastex.entity.auth.OurUsers;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class LoginHistory {
+public class ActivityLog {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,6 +20,6 @@ public class LoginHistory {
     @ManyToOne
     private OurUsers userId;
 
-    private LocalDateTime loginTime;
-
+    private String action;
+    private LocalDateTime dateTime;
 }
