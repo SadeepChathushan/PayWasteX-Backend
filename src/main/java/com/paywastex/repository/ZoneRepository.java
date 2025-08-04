@@ -11,8 +11,6 @@ import java.util.Optional;
 
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
     Zone findByDescription(String description);
-//
-//    List<Zone> findAll();
 
 
 }

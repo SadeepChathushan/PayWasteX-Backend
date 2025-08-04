@@ -125,14 +125,5 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<GetAllUserResponse> getAllUsers() {
-//        List<OurUsers> users = ourUsersRepo.findAll();
-//
-//        return users.stream()
-//                .map(user -> modelMapper.map (user, GetAllUserResponse.class))
-//                .collect(Collectors.toList());
-//    }
-
 }
 
