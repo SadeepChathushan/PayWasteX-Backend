@@ -3,6 +3,8 @@ package com.paywastex.controller;
 import com.paywastex.dto.BillManagementCardResponse;
 import com.paywastex.dto.CollectorTotalResponse;
 import com.paywastex.dto.DashboardCardResponse;
+import com.paywastex.dto.ReqRes;
+import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.service.ResposibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,11 @@ public class ResposibleOfficerController {
     public ResponseEntity<BillManagementCardResponse> getBillManagementStatistics() {
         BillManagementCardResponse response = responsibleOfficerService.getBillManagemntStatistics();
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/add-zone")
+    public ResponseEntity<String> addZone(@RequestBody AddZoneRequest addZoneRequest) {
+        responsibleOfficerService.zone(addZoneRequest);
+        return ResponseEntity.ok("Zone successfully added");
     }
 }
