@@ -5,4 +5,8 @@ import com.paywastex.entity.DirectCustomerPayment;
 
 public interface ResposibleOfficerService {
     DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest);
+
+    void markCollectionAsPaid(Long collectionId);
+
+
 }

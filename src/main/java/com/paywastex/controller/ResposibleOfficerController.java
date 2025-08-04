@@ -20,4 +20,18 @@ public class ResposibleOfficerController {
         return ResponseEntity.ok("Payment successfully added");
     }
 
+//    @GetMapping("/collections")
+//    public ResponseEntity<List<PaymentCollectionResponse>> getCollectionsByCollector(
+//            @RequestParam Long collectorId) {
+//        List<PaymentCollectionResponse> collections = responsibleOfficerService.getCollectionsByCollectorId(collectorId);
+//        return ResponseEntity.ok(collections);
+//    }
+
+    @PutMapping("/collections/{id}/mark-paid")
+    public ResponseEntity<String> markCollectionAsPaid(@PathVariable Long id) {
+        responsibleOfficerService.markCollectionAsPaid(id);
+        return ResponseEntity.ok("Collection marked as PAID. Payment updated if applicable.");
+    }
+
+
 }
