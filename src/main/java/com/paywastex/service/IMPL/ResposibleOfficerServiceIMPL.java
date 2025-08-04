@@ -1,8 +1,6 @@
 package com.paywastex.service.IMPL;
 
-import com.paywastex.dto.BillManagementCardResponse;
-import com.paywastex.dto.CollectorTotalResponse;
-import com.paywastex.dto.DashboardCardResponse;
+import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.entity.DirectCustomerPayment;
@@ -12,6 +10,7 @@ import com.paywastex.entity.customer.Zone;
 import com.paywastex.enums.PaymentStatus;
 import com.paywastex.repository.*;
 import com.paywastex.service.ResposibleOfficerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +37,9 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
 
     @Autowired
     private ZoneRepository zoneRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest) {
@@ -114,5 +116,23 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
         zone.setActive(true);
         return zoneRepository.save(zone);
     }
+
+    @Override
+    public List<ZoneResponse> getAllZones() {
+        List<Zone> zones = zoneRepository.findAll();
+        return zones.stream()
+                .map(zone -> modelMapper.map(zone, ZoneResponse.class))
+                .collect(Collectors.toList());
+    }
+
+//    @Override
+//    public List<GetAllUserResponse> getAllUsers() {
+//        List<OurUsers> users = ourUsersRepo.findAll();
+//
+//        return users.stream()
+//                .map(user -> modelMapper.map (user, GetAllUserResponse.class))
+//                .collect(Collectors.toList());
+//    }
+
 }
 

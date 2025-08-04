@@ -1,9 +1,6 @@
 package com.paywastex.controller;
 
-import com.paywastex.dto.BillManagementCardResponse;
-import com.paywastex.dto.CollectorTotalResponse;
-import com.paywastex.dto.DashboardCardResponse;
-import com.paywastex.dto.ReqRes;
+import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.service.ResposibleOfficerService;
@@ -45,4 +42,11 @@ public class ResposibleOfficerController {
         responsibleOfficerService.zone(addZoneRequest);
         return ResponseEntity.ok("Zone successfully added");
     }
+    @GetMapping("/get-zone")
+    public ResponseEntity<List<ZoneResponse>> getAllZones() {
+        List<ZoneResponse> zones = responsibleOfficerService.getAllZones();
+        return ResponseEntity.ok(zones);
+    }
+
 }
+
