@@ -1,5 +1,6 @@
 package com.paywastex.controller;
 
+import com.paywastex.dto.BillManagementCardResponse;
 import com.paywastex.dto.CollectorTotalResponse;
 import com.paywastex.dto.DashboardCardResponse;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
@@ -29,6 +30,11 @@ public class ResposibleOfficerController {
     @GetMapping("/total-active-fee-collectors")
     public ResponseEntity<DashboardCardResponse> getTotalActiveFeeCollectors() {
         DashboardCardResponse response = responsibleOfficerService.getTotalActiveFeeCollectors();
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/bill-management-stats")
+    public ResponseEntity<BillManagementCardResponse> getBillManagementStatistics() {
+        BillManagementCardResponse response = responsibleOfficerService.getBillManagemntStatistics();
         return ResponseEntity.ok(response);
     }
 }
