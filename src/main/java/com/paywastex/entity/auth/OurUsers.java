@@ -51,12 +51,6 @@ public class OurUsers implements UserDetails {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column
-    private String gender;
-
-    @Column
-    private Date dob;
-
     @Column(nullable = false)
     private boolean accountNonLocked = true;
 
