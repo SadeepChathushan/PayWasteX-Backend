@@ -3,15 +3,18 @@ package com.paywastex.service.IMPL;
 import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
+import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
 import com.paywastex.entity.DirectCustomerPayment;
 import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.entity.billing.PaymentCollection;
+import com.paywastex.entity.customer.Customer;
 import com.paywastex.entity.customer.Zone;
 import com.paywastex.enums.PaymentStatus;
 import com.paywastex.repository.*;
 import com.paywastex.service.ResposibleOfficerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -39,7 +42,14 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
     private ZoneRepository zoneRepository;
 
     @Autowired
+    private  CustomerRepository customerRepository;
+
+
+    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest) {
@@ -123,6 +133,37 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
         return zones.stream()
                 .map(zone -> modelMapper.map(zone, ZoneResponse.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public OurUsers registerCustomer(ResponsibleOfficerCustomerRegisterRequest request){
+        Zone  zone  = zoneRepository.findById(request.getZoneId())
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + request.getUser()));
+
+        OurUsers user = new OurUsers();
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setAddress(request.getAddress());
+        user.setContactNo(request.getContactNo());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setNic(request.getNic());
+        user.setRole("CUSTOMER");
+        user.setAccountNonLocked(true);
+
+        OurUsers savedUser = ourUsersRepo.save(user);
+
+        Customer customer = new Customer();
+        customer.setBusinessName(request.getBusinessName());
+        customer.setRegistrationNumber(request.getRegistrationNumber());
+        customer.setBusinessType(request.getBusinessType());
+        customer.setCity(request.getCity());
+        customer.setZone(zone);
+        customer.setUser(savedUser);
+
+        customerRepository.save(customer);
+
+        return savedUser;
+
     }
 
 }
