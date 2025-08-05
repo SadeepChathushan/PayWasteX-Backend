@@ -21,16 +21,11 @@ public class Customer {
     @JoinColumn(name="id")
     private OurUsers user;
 
-    @Column(unique = true)
-    private String customerCode;
-
     private String businessName;
 
     private String businessType;
 
     private String registrationNumber;
-
-    private String location;
 
     private String city;
 
@@ -41,8 +36,6 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "collector_id")
     private OurUsers assignedCollector;
-
-    private String paymentMethod;
 
 
 }
