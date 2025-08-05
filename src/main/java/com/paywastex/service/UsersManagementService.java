@@ -196,7 +196,6 @@ public class UsersManagementService {
             customer.setBusinessName(dto.getBusinessName());
             customer.setBusinessType(dto.getBusinessType());
             customer.setRegistrationNumber(dto.getRegistrationNumber());
-            customer.setLocation(dto.getAddress());
             customer.setCity(dto.getCity());
 
             customerRepo.save(customer);
