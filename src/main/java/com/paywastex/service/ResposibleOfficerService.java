@@ -14,6 +14,8 @@ import java.util.List;
 public interface ResposibleOfficerService {
     DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest);
 
+    void markCollectionAsPaid(Long collectionId);
+
     List<CollectorTotalResponse> getCollectorTotals();
 
     DashboardCardResponse getTotalActiveFeeCollectors();

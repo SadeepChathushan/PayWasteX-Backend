@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/responsibleOfficer")
 public class ResposibleOfficerController {
@@ -22,6 +23,21 @@ public class ResposibleOfficerController {
         responsibleOfficerService.createDirectCustomerPayment(paymentRequest);
         return ResponseEntity.ok("Payment successfully added");
     }
+
+//    @GetMapping("/collections")
+//    public ResponseEntity<List<PaymentCollectionResponse>> getCollectionsByCollector(
+//            @RequestParam Long collectorId) {
+//        List<PaymentCollectionResponse> collections = responsibleOfficerService.getCollectionsByCollectorId(collectorId);
+//        return ResponseEntity.ok(collections);
+//    }
+
+    @PutMapping("/collections/{id}/mark-paid")
+    public ResponseEntity<String> markCollectionAsPaid(@PathVariable Long id) {
+        responsibleOfficerService.markCollectionAsPaid(id);
+        return ResponseEntity.ok("Collection marked as PAID. Payment updated if applicable.");
+    }
+
+
     @GetMapping("/collectors/total-collected")
     public List<CollectorTotalResponse> getAllCollectorTotals() {
         return responsibleOfficerService.getCollectorTotals();
