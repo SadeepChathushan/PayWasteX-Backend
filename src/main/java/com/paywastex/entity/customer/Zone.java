@@ -15,11 +15,17 @@ public class Zone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "zone_code")
+    private String zoneCode;
+
+    @Column(name = "zone_name")
+    private String zoneName;
+
     @Column(name = "description")
     private String description;
 
     @Column(name = "is_active")
-    private boolean active = true;
+    private boolean active   = true;
 
     @ManyToOne
     @JoinColumn(name = "assigned_officer_id")
