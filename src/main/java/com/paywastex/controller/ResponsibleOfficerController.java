@@ -4,7 +4,6 @@ import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
-import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.service.ResposibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/responsibleOfficer")
-public class ResposibleOfficerController {
+public class ResponsibleOfficerController {
 
     @Autowired
     private ResposibleOfficerService responsibleOfficerService;
