@@ -6,22 +6,36 @@ import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
 import com.paywastex.entity.DirectCustomerPayment;
 import com.paywastex.entity.auth.OurUsers;
+
+import com.paywastex.entity.billing.Payment;
 import com.paywastex.entity.billing.PaymentCollection;
+
 import com.paywastex.entity.customer.Customer;
 import com.paywastex.entity.customer.Zone;
+
+import com.paywastex.entity.billing.PaymentSummary;
+import com.paywastex.enums.CollectionStatus;
+
 import com.paywastex.enums.PaymentStatus;
 import com.paywastex.repository.*;
 import com.paywastex.service.ResposibleOfficerService;
+import jakarta.transaction.Transactional;
+
+import com.paywastex.entity.customer.Zone;
+
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 
 @Service
 public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
@@ -30,13 +44,20 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
     private DirectCustomerPayRepository directCustomerPayRepository;
 
     @Autowired
+
+    private PaymentCollectionRepository paymentCollectionRepository;
+
+    @Autowired
+
     private PaymentRepository paymentRepository;
 
     @Autowired
     private OurUsersRepo ourUsersRepo;
 
     @Autowired
-    private PaymentCollectionRepository paymentCollectionRepository;
+    private PaymentSummaryRepository paymentSummaryRepository;
+
+
 
     @Autowired
     private ZoneRepository zoneRepository;
@@ -48,8 +69,10 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     @Override
     public DirectCustomerPayment createDirectCustomerPayment(DirectCustomerPaymentRequest paymentRequest) {
@@ -67,6 +90,33 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
         payment.setUser(user);
 
         return directCustomerPayRepository.save(payment);
+
+    }
+
+    @Transactional
+    public void markCollectionAsPaid(Long collectionId) {
+        PaymentCollection collection = paymentCollectionRepository.findById(collectionId)
+                .orElseThrow(() -> new RuntimeException("Collection not found"));
+
+        collection.setStatus(CollectionStatus.PAID);
+        paymentCollectionRepository.save(collection);
+
+        // Now check if Payment can be marked as PAID
+        Payment payment = collection.getPayment();
+
+        BigDecimal amountDue = paymentSummaryRepository
+                .findById(payment.getId())
+                .map(PaymentSummary::getAmountDue)
+                .orElse(BigDecimal.ZERO); // Or throw if not found
+
+        boolean allCollectionsPaid = payment.getCollections()
+                .stream()
+                .allMatch(c -> c.getStatus() == CollectionStatus.PAID);
+
+        if (amountDue.compareTo(BigDecimal.ZERO) == 0 && allCollectionsPaid) {
+            payment.setStatus(PaymentStatus.PAID);
+            paymentRepository.save(payment);
+        }
     }
 
     @Override

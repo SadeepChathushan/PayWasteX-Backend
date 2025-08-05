@@ -29,4 +29,5 @@ public class FeeCollectionController {
     public DashboardSummaryDto getDashboardSummary(){
         return feeCollectionService.getDashboardSummary();
     }
+
 }
