@@ -152,8 +152,6 @@ public class UsersManagementService {
         u.setFullName(in.getFullName());
         u.setNic(in.getNic());
         u.setContactNo(in.getContactNo());
-        u.setDob(in.getDob());
-        u.setGender(in.getGender());
         u.setAddress(in.getAddress());
         u.setRole(in.getRole());
         u.setCreatedAt(new Date());
