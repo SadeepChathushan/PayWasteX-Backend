@@ -6,7 +6,9 @@ import com.paywastex.dto.DashboardCardResponse;
 import com.paywastex.dto.ZoneResponse;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
+import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
 import com.paywastex.entity.DirectCustomerPayment;
+import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.entity.customer.Zone;
 
 import java.util.List;
@@ -25,5 +27,7 @@ public interface ResposibleOfficerService {
     Zone zone(AddZoneRequest addZoneRequest);
 
     List<ZoneResponse> getAllZones();
+
+    OurUsers registerCustomer(ResponsibleOfficerCustomerRegisterRequest request);
 
 }
