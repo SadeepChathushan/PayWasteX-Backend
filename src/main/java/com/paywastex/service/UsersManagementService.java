@@ -152,8 +152,6 @@ public class UsersManagementService {
         u.setFullName(in.getFullName());
         u.setNic(in.getNic());
         u.setContactNo(in.getContactNo());
-        u.setDob(in.getDob());
-        u.setGender(in.getGender());
         u.setAddress(in.getAddress());
         u.setRole(in.getRole());
         u.setCreatedAt(new Date());
@@ -198,7 +196,6 @@ public class UsersManagementService {
             customer.setBusinessName(dto.getBusinessName());
             customer.setBusinessType(dto.getBusinessType());
             customer.setRegistrationNumber(dto.getRegistrationNumber());
-            customer.setLocation(dto.getAddress());
             customer.setCity(dto.getCity());
 
             customerRepo.save(customer);
