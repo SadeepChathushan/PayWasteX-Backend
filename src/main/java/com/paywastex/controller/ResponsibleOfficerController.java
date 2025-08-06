@@ -5,7 +5,7 @@ import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
 import com.paywastex.entity.auth.OurUsers;
-import com.paywastex.service.ResposibleOfficerService;
+import com.paywastex.service.ResponsibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/responsibleOfficer")
-public class ResposibleOfficerController {
+public class ResponsibleOfficerController {
 
     @Autowired
-    private ResposibleOfficerService responsibleOfficerService;
+    private ResponsibleOfficerService responsibleOfficerService;
 
     @PostMapping("/payments")
     public ResponseEntity<String> createPayment(@RequestBody DirectCustomerPaymentRequest paymentRequest) {
@@ -71,6 +71,13 @@ public class ResposibleOfficerController {
         responsibleOfficerService.registerCustomer(request);
         return ResponseEntity.ok("Customer registered successfully");
     }
+
+    @GetMapping("/All-Active-Customers")
+    public ResponseEntity<List<ActiveAllCustomerResponse>> getAllCustomers() {
+        List<ActiveAllCustomerResponse> response = responsibleOfficerService.getAllCustomers();
+        return ResponseEntity.ok(response);
+    }
+
 
 }
 

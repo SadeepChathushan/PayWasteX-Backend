@@ -18,7 +18,7 @@ import com.paywastex.enums.CollectionStatus;
 
 import com.paywastex.enums.PaymentStatus;
 import com.paywastex.repository.*;
-import com.paywastex.service.ResposibleOfficerService;
+import com.paywastex.service.ResponsibleOfficerService;
 import jakarta.transaction.Transactional;
 
 import com.paywastex.entity.customer.Zone;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
+public class ResposibleOfficerServiceIMPL implements ResponsibleOfficerService {
 
     @Autowired
     private DirectCustomerPayRepository directCustomerPayRepository;
@@ -216,5 +216,24 @@ public class ResposibleOfficerServiceIMPL implements ResposibleOfficerService {
 
     }
 
+    @Override
+    public List<ActiveAllCustomerResponse> getAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+
+        return customers.stream()
+                .map(customer -> {
+                    ActiveAllCustomerResponse response = new ActiveAllCustomerResponse();
+                    OurUsers user = customer.getUser();
+                    response.setFullName(user.getFullName());
+                    response.setContactNo(user.getContactNo());
+                    response.setBusinessName(customer.getBusinessName());
+                    response.setRegistrationNumber(customer.getRegistrationNumber());
+                    if (customer.getZone() != null) {
+                        response.setZoneId(customer.getZone().getId());
+                    }
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
 }
 
