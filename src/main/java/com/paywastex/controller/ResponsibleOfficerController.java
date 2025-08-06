@@ -4,8 +4,10 @@ import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
+
 import com.paywastex.entity.auth.OurUsers;
 import com.paywastex.service.ResponsibleOfficerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,9 @@ import java.util.List;
 @RequestMapping("/responsibleOfficer")
 public class ResponsibleOfficerController {
 
-    @Autowired
+
     private ResponsibleOfficerService responsibleOfficerService;
+
 
     @PostMapping("/payments")
     public ResponseEntity<String> createPayment(@RequestBody DirectCustomerPaymentRequest paymentRequest) {
@@ -60,6 +63,7 @@ public class ResponsibleOfficerController {
         responsibleOfficerService.zone(addZoneRequest);
         return ResponseEntity.ok("Zone successfully added");
     }
+
     @GetMapping("/get-zone")
     public ResponseEntity<List<ZoneResponse>> getAllZones() {
         List<ZoneResponse> zones = responsibleOfficerService.getAllZones();
@@ -77,7 +81,6 @@ public class ResponsibleOfficerController {
         List<ActiveAllCustomerResponse> response = responsibleOfficerService.getAllCustomers();
         return ResponseEntity.ok(response);
     }
-
 
 }
 
