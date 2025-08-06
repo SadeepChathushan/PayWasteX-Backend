@@ -5,7 +5,9 @@ import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
 
-import com.paywastex.service.ResposibleOfficerService;
+import com.paywastex.entity.auth.OurUsers;
+import com.paywastex.service.ResponsibleOfficerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,9 @@ import java.util.List;
 @RequestMapping("/responsibleOfficer")
 public class ResponsibleOfficerController {
 
-    @Autowired
-    private ResposibleOfficerService responsibleOfficerService;
+
+    private ResponsibleOfficerService responsibleOfficerService;
+
 
     @PostMapping("/payments")
     public ResponseEntity<String> createPayment(@RequestBody DirectCustomerPaymentRequest paymentRequest) {
@@ -60,17 +63,23 @@ public class ResponsibleOfficerController {
         responsibleOfficerService.zone(addZoneRequest);
         return ResponseEntity.ok("Zone successfully added");
     }
-  
+
     @GetMapping("/get-zone")
     public ResponseEntity<List<ZoneResponse>> getAllZones() {
         List<ZoneResponse> zones = responsibleOfficerService.getAllZones();
         return ResponseEntity.ok(zones);
     }
-  
+
     @PostMapping("/register")
     public ResponseEntity<String> registerCustomer(@RequestBody ResponsibleOfficerCustomerRegisterRequest request) {
         responsibleOfficerService.registerCustomer(request);
         return ResponseEntity.ok("Customer registered successfully");
+    }
+
+    @GetMapping("/All-Active-Customers")
+    public ResponseEntity<List<ActiveAllCustomerResponse>> getAllCustomers() {
+        List<ActiveAllCustomerResponse> response = responsibleOfficerService.getAllCustomers();
+        return ResponseEntity.ok(response);
     }
 
 }
