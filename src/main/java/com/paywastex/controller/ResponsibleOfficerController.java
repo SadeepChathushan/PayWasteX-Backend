@@ -4,6 +4,7 @@ import com.paywastex.dto.*;
 import com.paywastex.dto.request.AddZoneRequest;
 import com.paywastex.dto.request.DirectCustomerPaymentRequest;
 import com.paywastex.dto.request.ResponsibleOfficerCustomerRegisterRequest;
+
 import com.paywastex.service.ResposibleOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,12 +60,13 @@ public class ResponsibleOfficerController {
         responsibleOfficerService.zone(addZoneRequest);
         return ResponseEntity.ok("Zone successfully added");
     }
+  
     @GetMapping("/get-zone")
     public ResponseEntity<List<ZoneResponse>> getAllZones() {
         List<ZoneResponse> zones = responsibleOfficerService.getAllZones();
         return ResponseEntity.ok(zones);
     }
-
+  
     @PostMapping("/register")
     public ResponseEntity<String> registerCustomer(@RequestBody ResponsibleOfficerCustomerRegisterRequest request) {
         responsibleOfficerService.registerCustomer(request);
